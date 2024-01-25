@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 22:38:46 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/18 14:29:44 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/01/20 14:03:43 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	main(int ac, char **av)
 {
-	int		i;
 	int		size;
 	char	**strings;
 	int		*arr;
 
-	i = 1;
 	if (check_spaces_signs(ac, av))
 	{
 		write(2, "Error\n", 6);
@@ -31,10 +29,11 @@ int	main(int ac, char **av)
 		return (0);
 	while (strings[size])
 		++size;
-	i = 0;
 	arr = set_array(strings);
 	free_leaks(strings);
 	if (last_check(arr, size))
 		return (0);
-	push_swap(arr, size);
+	if (check_sort(arr, size))
+		push_swap(arr, size);
+	return (0);
 }

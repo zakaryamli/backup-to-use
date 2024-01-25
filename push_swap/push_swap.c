@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:10:48 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/18 14:10:21 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/01/20 14:08:26 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,6 @@ static	int	*make_index(int arr[], int size)
 		i++;
 	}
 	return (result);
-}
-
-static	int	check_sort(int arr[], int size)
-{
-	int	i;
-
-	i = 1;
-	while (i < size)
-	{
-		if (arr[i] > arr[i - 1])
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 static void	extract_stack_b(int *stack_a,
@@ -95,7 +81,7 @@ static	void	ft_sort(int stack_a[], int stack_b[], int *size_a, int *size_b)
 	extract_stack_b(stack_a, stack_b, size_a, size_b);
 }
 
-void	push_swap(int arr[], int size)
+int	push_swap(int arr[], int size)
 {
 	int	*stack_a;
 	int	*stack_b;
@@ -103,9 +89,12 @@ void	push_swap(int arr[], int size)
 
 	size_b = 0;
 	stack_b = malloc(sizeof(int) * size);
+	if (!stack_b)
+		return (free(arr), 0);
 	stack_a = make_index(arr, size);
 	free(arr);
 	ft_sort(stack_a, stack_b, &size, &size_b);
 	free(stack_b);
 	free(stack_a);
+	return (0);
 }

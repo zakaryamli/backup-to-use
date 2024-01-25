@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:55:52 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/18 12:04:57 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/01/25 15:41:27 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	*set_array(char **strings)
 		i++;
 	arr = malloc(sizeof(int) * i);
 	if (!arr)
+	{
 		free(strings);
+		exit(0);
+	}
 	j = 0;
 	i -= 1;
 	while (i >= 0)

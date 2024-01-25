@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:49:17 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/18 14:10:31 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/01/20 14:01:03 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	push_a(int source[], int dest[], int *source_size, int *dest_size);
 void	push_b(int source[], int dest[], int *source_size, int *dest_size);
 void	swap_a(int arr[], int size);
 void	swap_b(int arr[], int size);
-void	push_swap(int arr[], int size);
+int		push_swap(int arr[], int size);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *str1, const char *str2);
@@ -36,6 +36,7 @@ long	ft_atoi(const char *str);
 char	**free_leaks(char **strs);
 int		check_duplicate_int(int arr[], int size);
 int		check_duplicate(char **str);
+int		check_sort(int arr[], int size);
 int		find_index(int stack[], int size, int element);
 int		find_small(int arr[], int size);
 int		find_largest_number(int arr[], int size);
