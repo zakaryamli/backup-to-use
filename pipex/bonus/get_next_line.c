@@ -6,28 +6,28 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:05:38 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/26 13:32:40 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/02 20:04:45 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "pipex_bonus.h"
 
 static char	*read_f(int fd, char	*rest)
 {
 	char	*tmp;
 	int		count;
 
-	tmp = malloc(sizeof(char) * (size_t)BUFFER_SIZE + 1);
+	tmp = malloc(sizeof(char) * 5);
 	if (!tmp)
 		return (free(rest), rest = NULL, NULL);
 	count = 1;
 	while (count > 0 && ft_strchr(rest, '\n') == 0)
 	{
-		count = read(fd, tmp, BUFFER_SIZE);
+		count = read(fd, tmp, 4);
 		if (count == -1)
 			return (free(rest), free(tmp), NULL);
 		tmp[count] = '\0';
-		rest = ft_strjoin(rest, tmp);
+		rest = ft_join_it(rest, tmp);
 		if (!rest)
 			break ;
 	}
@@ -84,7 +84,7 @@ char	*get_next_line(int fd)
 	static char	*saved_str;
 	char		*result;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+	if (fd < 0)
 		return (NULL);
 	if (!saved_str)
 		saved_str = ft_strdup("");
@@ -101,23 +101,22 @@ char	*get_next_line(int fd)
 	saved_str = save_rest(saved_str);
 	return (result);
 }
-#include<stdio.h>
-#include <fcntl.h>
-int main ()
-{
-	// char *line;
-	int fd;
-	int flags = O_RDWR | O_CREAT;
-	for (int i = 0; i < 20; i++)
-	{
-		fd = open("file", flags, 0755);
-		printf("fd , %d\n", fd);
-		close(fd);
-	}
-	// while(line)
-	// {
-	// 	line = get_next_line(0);
-	// 	printf("%s", line);
-	// }
-	sleep(100);
-}
+// #include<stdio.h>
+// #include <fcntl.h>
+// int main ()
+// {
+// 	char *line;
+// 	int fd;
+// 	int flags = O_RDWR | O_CREAT;
+// 	// for (int i = 0; i < 20; i++)
+// 	// {
+// 	// 	fd = open("../infile", flags, 0755);
+// 	// 	printf("fd , %d\n", fd);
+// 	// 	close(fd);
+// 	// }
+// 	while(line)
+// 	{
+// 		line = get_next_line(0);
+// 		printf("%s", line);
+// 	}
+// }
