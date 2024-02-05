@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:30:40 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/03 13:44:12 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/04 14:50:11 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct t_pipe
 	// int *pids;
 	int i;
 	pid_t pid;
-	// int j;
+	int link_var;
 	int fd[2];
 	int step;
 	int infile;

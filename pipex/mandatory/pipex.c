@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:56:08 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/03 15:23:30 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/04 14:58:30 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void second_child_routine(s_pipe *needs)
 		e = dup2(needs->outfile, STDOUT_FILENO);
 		if(e == -1)
 			error_handler("dup2 error");
-		(close(needs->fd[0]), close(needs->outfile), lose(needs->fd[1]));
+		(close(needs->fd[0]), close(needs->outfile), close(needs->fd[1]));
 		e = execve(needs->second_path, needs->second_cmd, needs->env);
 		if(e == -1)
 			error_handler("dup2 error");
