@@ -6,11 +6,11 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:52:18 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/28 18:05:47 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/13 16:44:23 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"pipex_bonus.h"
+#include "pipex_bonus.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

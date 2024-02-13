@@ -6,12 +6,12 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:30:40 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/04 14:50:11 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/13 17:47:09 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
-#define PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -22,26 +22,24 @@
 # ifndef BUFFER_SIZE 
 #  define BUFFER_SIZE 10
 # endif
+
 typedef struct t_pipe
 {
-	// int *pids;
-	int i;
-	pid_t pid;
-	int link_var;
-	int fd[2];
-	int step;
-	int infile;
-	int outfile;
-	char *infile_name;
-	char *outfile_name;
-	char *path;
-	// char *middle_path;
-	// char *second_path;
-	char **cmd;
-	// char **middle_cmd;
-	char *limiter;
-	char **env;
-}s_pipe;
+	int		i;
+	pid_t	pid;
+	int		link_var;
+	int		fd[2];
+	int		step;
+	int		infile;
+	int		outfile;
+	char	*infile_name;
+	char	*outfile_name;
+	char	*path;
+	char	**cmd;
+	char	*limiter;
+	char	**env;
+}	t_pipe;
+
 char	*ft_strstr(const char *haystack, const char *needle);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *str);
@@ -58,4 +56,10 @@ char	*get_next_line(int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_join_it(char *s1, char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	error_handler(char *str);
+void	ft_execution(char *cmd, t_pipe *needs);
+void	ft_unlink(t_pipe *needs);
+void	heredoc_handler(t_pipe *needs);
+void	first_cmd(int ac, char **av, t_pipe *needs);
+void	last_child(int ac, char **av, t_pipe needs);
 #endif

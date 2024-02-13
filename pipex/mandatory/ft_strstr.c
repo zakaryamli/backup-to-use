@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:20:41 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/25 22:39:35 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/13 16:29:56 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	{
 		j = 0;
 		while (to_look[i + j] == needle[j] && needle[j])
-				j++;
+			j++;
 		if (needle[j] == '\0')
 			return (&to_look[index]);
-
 		index++;
 		i = index;
 	}
 	return (NULL);
 }
-

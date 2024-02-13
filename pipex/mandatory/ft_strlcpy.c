@@ -6,11 +6,10 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 14:52:18 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/25 22:52:23 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/13 16:29:31 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
 #include "pipex.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)

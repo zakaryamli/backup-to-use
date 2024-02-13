@@ -6,13 +6,13 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:32:11 by zyamli            #+#    #+#             */
-/*   Updated: 2024/01/27 18:08:05 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/13 16:29:18 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int		ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
 	int				i;
 	unsigned char	*str;
