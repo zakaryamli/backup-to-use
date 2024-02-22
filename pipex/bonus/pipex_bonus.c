@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 22:25:07 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/13 17:43:42 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/22 14:58:38 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	ft_execution(char *cmd, t_pipe *needs)
 {
 	needs->path = find_path(cmd, needs->env);
 	if (!needs->path)
-		error_handler("error PATH");
+		ft_print_error("error PATH\n");
 	needs->cmd = ft_split(cmd, ' ');
+	if (!needs->cmd)
+		ft_print_error("error command\n");
 	if (-1 == execve(needs->path, needs->cmd, needs->env))
 		(close(0), close(needs->infile), error_handler("execve"));
 }
@@ -38,8 +40,6 @@ void	last_child(int ac, char **av, t_pipe needs)
 		close(needs.outfile);
 		ft_execution(av[ac - 2], &needs);
 	}
-	while (wait(NULL) != -1)
-		;
 	close(0);
 }
 
@@ -56,13 +56,12 @@ void	heredoc_handler(t_pipe *needs)
 		line = get_next_line(0);
 		if (!line)
 			break ;
-		if (!ft_strncmp(line, needs->limiter, ft_strlen(line) - 1))
+		if (!ft_strncmp(line, needs->limiter, ft_strlen(needs->limiter)))
 			break ;
 		ft_putstr_fd(line, needs->infile);
 		free(line);
 	}
-	free(line);
-	close(needs->infile);
+	(free(needs->limiter), free(line), close(needs->infile));
 	needs->infile = open("tempfile", O_RDWR);
 	if (needs->infile == -1)
 		error_handler("here_doc");

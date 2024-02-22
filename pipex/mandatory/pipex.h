@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:30:40 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/13 16:25:34 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/14 15:12:47 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ void	free_leaks_arr(char **strs);
 t_pipe	set_values(char **av, char **env);
 void	error_handler(char *str);
 void	pipex(t_pipe *needs);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_print_error(char *str);
 #endif

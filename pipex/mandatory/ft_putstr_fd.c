@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:09:16 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/14 15:10:10 by zyamli           ###   ########.fr       */
+/*   Created: 2023/11/10 21:56:23 by zyamli            #+#    #+#             */
+/*   Updated: 2024/02/14 15:09:53 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_print_error(char *str)
+void	ft_putstr_fd(char *s, int fd)
 {
-	ft_putstr_fd(str, 2);
-	exit (1);
-}
+	size_t	i;
 
-int	main(int ac, char **av, char **env)
-{
-	t_pipe	needs;
-
-	if (ac < 5)
-		ft_print_error("input error");
-	if (!*env)
-		ft_print_error("environnement error");
-	needs = set_values(av, env);
-	pipex(&needs);
-	free(needs.first_path);
-	free(needs.second_path);
-	free_leaks_arr(needs.first_cmd);
-	free_leaks_arr(needs.second_cmd);
+	i = 0;
+	if (fd < 0)
+		return ;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		write (fd, &s[i], 1);
+		i++;
+	}
 }

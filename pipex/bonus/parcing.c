@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 23:00:59 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/13 17:42:24 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/14 13:16:09 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*find_commands(char *av, char **pathes)
 		free(result);
 		result = "\0";
 	}
+	ft_putstr_fd("command not found\n", 2);
 	return (NULL);
 }
 
@@ -70,8 +71,8 @@ char	**extract_paths(char **env)
 			return (ft_split(env[i] + 5, ':'));
 		i++;
 	}
-	perror("PATH not found");
-	exit(0);
+	ft_print_error("PATH not found\n");
+	return (NULL);
 }
 
 char	*find_path(char *cmd, char *env[])
@@ -81,10 +82,10 @@ char	*find_path(char *cmd, char *env[])
 
 	to_look = extract_paths(env);
 	if (!*to_look)
-		(perror("PATH not found"), exit(0));
+		ft_print_error("PATH not found\n");
 	path = find_commands(cmd, to_look);
 	if (!path)
-		(perror("command error"), exit(0));
+		ft_print_error("command error\n");
 	free_leaks_arr(to_look);
 	return (path);
 }

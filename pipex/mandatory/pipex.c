@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:56:08 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/13 16:26:19 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/14 15:11:57 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ void	pipex(t_pipe *needs)
 	}
 	if (needs->pid2 == 0)
 		second_child_routine(needs);
-	close(needs->fd[0]);
-	close(needs->fd[1]);
+	(close(needs->fd[0]), close(needs->fd[1]));
 	wait(NULL);
 	wait(NULL);
 }

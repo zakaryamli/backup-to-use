@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 22:30:40 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/13 17:47:09 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/14 13:18:53 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ void	ft_unlink(t_pipe *needs);
 void	heredoc_handler(t_pipe *needs);
 void	first_cmd(int ac, char **av, t_pipe *needs);
 void	last_child(int ac, char **av, t_pipe needs);
+void	ft_print_error(char *str);
 #endif

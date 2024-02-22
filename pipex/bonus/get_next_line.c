@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 17:05:38 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/02 20:04:45 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/15 16:59:41 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,22 +101,3 @@ char	*get_next_line(int fd)
 	saved_str = save_rest(saved_str);
 	return (result);
 }
-// #include<stdio.h>
-// #include <fcntl.h>
-// int main ()
-// {
-// 	char *line;
-// 	int fd;
-// 	int flags = O_RDWR | O_CREAT;
-// 	// for (int i = 0; i < 20; i++)
-// 	// {
-// 	// 	fd = open("../infile", flags, 0755);
-// 	// 	printf("fd , %d\n", fd);
-// 	// 	close(fd);
-// 	// }
-// 	while(line)
-// 	{
-// 		line = get_next_line(0);
-// 		printf("%s", line);
-// 	}
-// }

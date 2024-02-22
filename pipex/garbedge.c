@@ -5,20 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 23:36:07 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/05 13:21:02 by zyamli           ###   ########.fr       */
+/*   Created: 2024/02/14 14:52:07 by zyamli            #+#    #+#             */
+/*   Updated: 2024/02/14 14:52:08 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"pipex_bonus.h"
 
- void ft_execution(char *cmd, s_pipe *needs)
+#include<unistd.h>
+#include<fcntl.h>
+typedef struct t_pipe
+{
+	pid_t	pid;
+	int		i;
+	int		fd[2];
+	int		infile;
+	int		outfile;
+	char	*infile_name;
+	char	*outfile_name;
+	char	*first_path;
+	char	*second_path;
+	char	**first_cmd;
+	char	**second_cmd;
+	char	**env;
+}	t_pipe;
+
+ void ft_execution(char *cmd, t_pipe *needs)
 {
 	needs->first_path = find_path(cmd, needs->env);
 	needs->first_cmd = ft_split(cmd, ' ');
 	execve(needs->first_path, needs->first_cmd, needs->env);
 }
-void	cmd_executer(char *cmd, s_pipe *needs)
+void	cmd_executer(char *cmd, t_pipe *needs)
 {
 	if (pipe(needs->fd) == -1)
 		exit(0);
@@ -47,7 +64,7 @@ void	cmd_executer(char *cmd, s_pipe *needs)
 int main(int ac, char **av, char **env)	
 {
 	// atexit(ff1);
-	s_pipe needs;
+	t_pipe needs;
 	needs.infile = open(av[1], O_RDONLY);
 	needs.outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	needs.env = env;
