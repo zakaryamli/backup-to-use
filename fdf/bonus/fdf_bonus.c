@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:51:07 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/24 22:24:22 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/25 18:16:28 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int get_color(int x, int y, t_der *frac, t_fdf *data)
 	int blue;
 	double perc;
 
-	if(frac->dx > frac->dy)
+	if(abs(frac->dx) > abs(frac->dy))
 		perc = percent(data->a->x, data->b->x, x);
 	else
 		perc = percent(data->a->y, data->b->y, y);
@@ -370,17 +370,23 @@ void set_values(t_fdf *data)
 	if(data->x_scale > data->y_scale)
 		data->x_scale = data->y_scale;
 }
-int draw_map(t_fdf *data)
+
+void ft_eraser(int *add)
 {
-	int row;
-	int col;
 	int  i = 0;
-	int *add = (int *)data->img.add;
 	while (i < WINDOW_HEIGHT * WINDOW_WIDTH)
 	{
 		add[i] = 0x000000;
 		i++;
 	}
+}
+
+int draw_map(t_fdf *data)
+{
+	int row;
+	int col;
+
+	ft_eraser((int *)data->img.add);
 	set_values(data);
 	row = 0;
 	while(row < data->width)
@@ -395,12 +401,15 @@ int draw_map(t_fdf *data)
 		}
 		row++;
 	}
+	free(data->a);
+	free(data->b);
 	return 0;
 }
 
 int destroy_win(t_fdf *data)
 {
-
+	// (void)data;
+	// mlx_destroy_image(data->mlx_ptr, data->img.add);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_window);
 	exit(0);
 
@@ -484,10 +493,8 @@ int keyfun(int keycode, t_fdf *data)
 		 0xffff, "Orthographic 2: 'p'\nOrthographic 3: 'l'\nfor rotation up: 'w' down:'s' flip left:'a' flip right:'d' right:'z' left:'x'\n ");
 	mlx_string_put(data->mlx_ptr, data->mlx_window, 0, 60,
 		 0xffff,"\n for elavation; '8' '2' ");
-	 
-	
 	// if(button == 5)
-	printf("%d\n", keycode);
+	// printf("%d\n", keycode);
 		
 	return(0);
 }
@@ -498,9 +505,13 @@ int keyfun(int keycode, t_fdf *data)
 // 	printf("%d\n", key_hook);
 // 	return(0);
 // }
-
+void fff()
+{
+	system("leaks fdf_bonus");
+}
 int main(int ac, char **av)
 {
+	atexit(fff);
 	t_fdf data;
 	data.zoom = 1;
 	data.step = 0;
@@ -535,5 +546,4 @@ int main(int ac, char **av)
 		 0xffff,"\n for elavation; '8' '2' ");
 	// mlx_loop_hook(data.mlx_ptr, &hookfun, &data);
     mlx_loop(data.mlx_ptr);
-    free(data.mlx_ptr);
 }
