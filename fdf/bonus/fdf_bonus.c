@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:51:07 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/25 18:16:28 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/25 22:40:04 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,13 +220,9 @@ void draw_line(t_fdf *data)
 	frac.dx = data->b->x - data->a->x;
 	frac.dy = data->b->y - data->a->y;
 	if(abs(frac.dx) > abs(frac.dy))
-	{
 		smaller_slope(frac, data);
-	}
 	else
-	{
 		bigger_slope(frac, data);
-	}
 
 	
 }
