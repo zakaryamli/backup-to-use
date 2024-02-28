@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:51:02 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/25 17:35:40 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/27 16:25:13 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_atoi_base(const char *str, int str_base);
 char	**ft_split(char *str);
 char	*get_next_line(int fd);
 char	*ft_strchr(char *result, char c);
-int	ft_strlen(char *str);
+int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 char	*ft_join_it(char *s1, char *s2);
 size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
@@ -94,4 +94,8 @@ char	**free_leaks(char **strs);
 void	get_field(char *filename, t_fdf *data);
 int		count_words(char *str);
 void	free_int_leaks(int **arr,int size);
+void	rotation_key(int keycode, t_fdf *data);
+void	zoom_translation(int keycode, t_fdf *data);
+void	projection_key(int keycode, t_fdf *data);
+void	put_menu(t_fdf *data);
 #endif

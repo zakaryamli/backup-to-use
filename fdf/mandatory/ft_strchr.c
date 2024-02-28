@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:22:47 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/20 16:23:06 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:44:24 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(char *result, char c)
 {
 	int	i;
 
+	if (!result)
+		return (0);
 	i = 0;
 	while (result[i] != '\0')
 	{

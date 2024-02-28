@@ -6,24 +6,26 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:17:27 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/23 17:54:48 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:58:59 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
 
-int		ft_check(char c, int base)
+int	ft_check(char c, int base)
 {
-	char maxbase[17] = "0123456789abcdef";
-	char maxbase2[17] = "0123456789ABCDEF";
+	char	*maxbase;
+	char	*maxbase2;
 
+	maxbase = "0123456789abcdef";
+	maxbase2 = "0123456789ABCDEF";
 	while (base--)
 		if (maxbase[base] == c || maxbase2[base] == c)
 			return (1);
 	return (0);
 }
 
-int		ft_turner(char c)
+int	ft_turner(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (c - '0');
@@ -34,10 +36,10 @@ int		ft_turner(char c)
 	return (0);
 }
 
-int		ft_atoi_base(const char *str, int str_base)
+int	ft_atoi_base(const char *str, int str_base)
 {
-	int result;
-	int sign;
+	int	result;
+	int	sign;
 
 	result = 0;
 	if (*str == '-')

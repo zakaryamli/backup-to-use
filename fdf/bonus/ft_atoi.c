@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 20:11:24 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/25 16:31:06 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:55:13 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ long	ft_atoi(const char *str)
 	int			sign;
 	long long	res;
 
-	if(!str)
-		return(0);
+	if (!str)
+		return (0);
 	i = 0;
 	sign = 1;
 	res = 0;
-	while (str[i] && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
-		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')

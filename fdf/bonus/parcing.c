@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:37:55 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/25 16:57:03 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/28 16:04:35 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	*set_array(char **strings, t_fdf *data, int i)
 {
 	int	j;
 	int	*arr;
-	int k;
+	int	k;
+
 	arr = malloc(sizeof(int) * data->width);
 	if (!arr)
 		(free(strings),
@@ -71,12 +72,12 @@ int	*set_array(char **strings, t_fdf *data, int i)
 	while (j < data->width)
 	{
 		arr[j] = ft_atoi(strings[j]);
-		if(!strings[j])
+		if (!strings[j])
 			break ;
 		if (ft_strchr(strings[j], ',') != 0)
 		{
 			k = 0;
-			while(strings[j][k] != ',')
+			while (strings[j][k] != ',')
 				k++;
 			data->color_map[i][j] = ft_atoi_base(*(strings + j) + k + 3, 16);
 		}
@@ -100,7 +101,6 @@ void set_to_default(int  **color, t_fdf *data)
 		j = 0;
 		while(j < data->width)
 		{
-			
 			color[i][j] = 0xffffff;
 			j++;
 		}

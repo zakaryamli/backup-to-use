@@ -1,5 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/02/27 15:58:26 by zyamli            #+#    #+#              #
+#    Updated: 2024/02/27 16:23:44 by zyamli           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRC = mandatory/fdf.c mandatory/ft_atoi.c  mandatory/ft_strlcpy.c  mandatory/get_next_line_utils.c mandatory/parcing.c mandatory/ft_split.c mandatory/get_next_line.c mandatory/ft_atoi_base.c
-BONUS = bonus/fdf_bonus.c bonus/ft_atoi.c  bonus/ft_strlcpy.c  bonus/get_next_line_utils.c bonus/parcing.c bonus/ft_split.c bonus/get_next_line.c bonus/ft_atoi_base.c
+BONUS = bonus/fdf_bonus.c bonus/ft_atoi.c bonus/key_code_bonus.c  bonus/ft_strlcpy.c  bonus/get_next_line_utils.c bonus/parcing.c bonus/ft_split.c bonus/get_next_line.c bonus/ft_atoi_base.c
 OBJS = $(SRC:.c=.o)
 B_OBJ = $(BONUS:.c=.o)
 CC = cc 
