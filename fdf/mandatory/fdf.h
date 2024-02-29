@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:36:35 by zyamli            #+#    #+#             */
-/*   Updated: 2024/02/28 15:38:09 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/02/29 21:49:34 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,15 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 char	**free_leaks(char **strs);
 void	get_field(char *filename, t_fdf *data);
 int		count_words(char *str);
+int		get_color(int x, int y, t_der *frac, t_fdf *data);
+void	smaller_slope(t_der frac, t_fdf *data);
+void	bigger_slope(t_der frac, t_fdf *data);
+void	my_pixel_put(int x, int y, t_fdf *data, t_der *frac);
+int		z_zoom(t_fdf *data);
+void	draw_uderline(int row, int col, t_fdf *data);
+void	draw_forline(int row, int col, t_fdf *data);
+void	draw_line(t_fdf *data);
+int		keyfun(int keycode, t_fdf *data);
+int		destroy_win(t_fdf *data);
+void	isometric(t_fdf *data);
 #endif
