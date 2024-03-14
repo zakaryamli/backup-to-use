@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 18:20:27 by zyamli            #+#    #+#             */
-/*   Updated: 2024/03/11 14:27:53 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/03/13 23:37:02 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void lst_add(t_env **lst, t_env *new)
 	new->next = NULL;
 }
 
-t_env *env_new(char *var, char *name) {
+t_env *env_new(char *var, char *name)
+{
     t_env *newnode = (t_env *)malloc(sizeof(t_env));
     if (newnode == NULL) {
         perror("malloc");
@@ -47,9 +48,7 @@ t_env *env_new(char *var, char *name) {
 t_env *duplicate_list(t_env *head)
 {
 	if (head == NULL)
-	{
 		return NULL;
-	}
 
 	t_env *tmp = head; 
 	t_env *newlist = NULL;
@@ -58,7 +57,7 @@ t_env *duplicate_list(t_env *head)
 
 	while (tmp != NULL)
 	{
-		printf("%s====%s\n",tmp->name , tmp->var);
+		// printf("%s====%s\n",tmp->name , tmp->var);
 		newnode = env_new(tmp->var, tmp->name);
 		if (newlist == NULL)
 			newlist = newnode;
@@ -79,7 +78,75 @@ void swap(t_env *a, t_env *b)
 	a->name = b->name;
 	b->name = temp1;
 }
-void env_print(t_toexec *data) {
+void env_search_replace(t_env *head, char *to_replace, char *to_look)
+{
+	t_env	*tmp;
+
+	if (!head) 
+	{
+		printf("Invalid data or data->env is NULL\n");
+		return;
+	}
+
+	tmp = head;
+	while(tmp)
+		{
+			if(strcmp(tmp->name, to_look) == 0)
+			{
+				tmp->var = strdup(to_replace);
+				return;
+			}
+				
+			tmp = tmp->next;
+		}
+		return;
+}
+int env_list_serch(t_env **head, char *to_look)
+{
+	t_env	*tmp;
+
+	if (!*head) 
+	{
+		printf("Invalid data or data->env is NULL\n");
+		return (0);
+	}
+
+	tmp = *head;
+	while(tmp)
+		{
+			if(strcmp(tmp->name, to_look) == 0)
+				return(1);
+			tmp = tmp->next;
+		}
+		return(0);
+}
+void env_search_and_add(t_env *head, char *to_add, char *to_look)
+{
+	t_env	*tmp;
+
+	if (!head) 
+	{
+		printf("Invalid data or data->env is NULL\n");
+		return;
+	}
+
+	tmp = head;
+	while(tmp)
+		{
+			if(strcmp(tmp->name, to_look) == 0)
+			{
+				// printf("{%s}", tmp->next->name);
+				
+				tmp->var = ft_strjoin(tmp->var ,to_add);
+				return;
+			}
+				
+			tmp = tmp->next;
+		}
+		return;
+}
+void env_print(t_toexec *data)
+{
     t_env *tmp;
 
     if (!data || !data->env) {
@@ -148,8 +215,23 @@ void ft_export(char *name, char *var, t_env *head)
 		lst_add(&head ,newnode);
 		lst_add(&exported_env ,newnode);
 	}
-
-
+}
+char **split_env(char *arg)
+{
+	int i;
+	char **res = malloc(sizeof(char *) * 3);
+	
+	i = 0;
+	while(arg[i] != '=' && arg[i])
+		i++;
+	if(arg[i] == '=')
+	{
+		res[0] = ft_substr(arg, 0, i);
+		res[1] = ft_substr(arg ,i + 1 , strlen(arg));
+		res[2] = NULL;
+		return(res);
+	}
+	return(NULL);
 }
 
 int main(int ac, char **av, char **env)
@@ -192,8 +274,41 @@ int main(int ac, char **av, char **env)
 	// env_print(&data);
 	// printf("FGhfgh\n");
 	// printf("%s--------------------------------------\n", data.env->var);
-	ft_export("a", "zbizi",data.env);
+
+	char **to_add;
+	if(strstr(av[1], "+=") != NULL)
+	{
+		to_add = ft_split(av[1], '+');
+	}
+	else
+	{
+		to_add = split_env(av[1]);
+	}
+	if(env_list_serch(&data.env, to_add[0]))
+	{
+		if(strstr(av[1], "+=") != NULL)
+		{
+			env_search_and_add(data.env, &to_add[1][1], to_add[0]);
+		}
+		else if(strstr(av[1], "=") != NULL)
+		{
+			env_search_replace(data.env, to_add[1], to_add[0]);
+			// printf("{%s . %s}\n", to_replace[1], to_replace[0]);
+		}
+		// else
+		// 	ft_export(av[1], "", data.env);
+	}
+	else if(!env_list_serch(&data.env, to_add[0]))
+	{
+
+		if(strstr(av[1], "+=") != NULL)
+		{
+			ft_export(to_add[0], &to_add[1][1],data.env);
+		}
+		else if(strstr(av[1], "=") != NULL)
+		{
+			ft_export(to_add[0], to_add[1],data.env);
+		}
+	}
 	env_print(&data);
-	env_print(&data);
-	// printf("%s", data.env->var);
 }
