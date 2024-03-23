@@ -6,12 +6,62 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 15:11:11 by zyamli            #+#    #+#             */
-/*   Updated: 2024/03/13 15:44:22 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/03/21 22:52:36 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include<string.h>
+
+char* ft_strstr(const char* haystack, const char* needle)
+{
+
+    const char* p1;
+    const char* p2;
+    const char* p1_advance;
+
+	if (*needle == '\0')
+        return (char*)haystack;
+	p1_advance = haystack;
+    while (*p1_advance)
+	{
+        p1 = p1_advance;
+        p2 = needle;
+        
+        while (*p1 && *p2 && *p1 == *p2)
+		{
+            p1++;
+            p2++;
+        }
+        if (*p2 == '\0')
+            return (char*)p1_advance;
+        
+        p1_advance++;
+    }
+    
+    return NULL;
+}
+
+void	ft_print_error(char *str)
+{
+	ft_putstr_fd(str, 2);
+	exit (1);
+}
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
+
+	i = 0;
+	if (fd < 0)
+		return ;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		write (fd, &s[i], 1);
+		i++;
+	}
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -50,6 +100,26 @@ char	*ft_strdup(const char *s1)
 	}
 	rs[i] = '\0';
 	return (rs);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int				i;
+	unsigned char	*str;
+	unsigned char	a;
+
+	i = 0;
+	str = (unsigned char *)s;
+	a = (unsigned char)c;
+	while (str[i])
+	{
+		if (str[i] == a)
+			return ((char *)&str[i]);
+		i++;
+	}
+	if (a == '\0')
+		return ((char *)str + ft_strlen((char *)str));
+	return (0);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
