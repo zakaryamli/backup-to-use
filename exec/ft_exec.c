@@ -6,11 +6,11 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:04:57 by zyamli            #+#    #+#             */
-/*   Updated: 2024/03/23 02:43:10 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/03/23 03:23:26 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 #include <fcntl.h> 
 void print_open_file_descriptors() {
     int fd;
@@ -159,13 +159,10 @@ void	ft_execution(t_toexec *cmd, t_pipe *needs)
 	// needs->env = env_tolist(cmd->env);
 	needs->path = find_path(cmd->args[0], needs->env);
 
-	// print_open_file_descriptors();
+	print_open_file_descriptors();
 	// dprintf(2,"%s===== %s ======= %s\n", needs->path, cmd->args[0], cmd->args[1]);
 	if (!needs->path)
 		ft_print_error("error PATH\n");
-	// dprintf(2, "%s\n", needs->path);
-		dprintf(2, "%s\n", needs->path);
-
 	if (-1 == execve(needs->path, cmd->args, needs->env))
 		(close(0), close(needs->infile), error_handler("execve"));
 }
@@ -178,13 +175,11 @@ void	last_child(t_toexec **cmds, t_pipe *needs)
 		error_handler("fork");
 	if (needs->pids[needs->p] == 0)
 	{
-		dprintf(2, "%d === 0;;;%d .   1;;;%d\n", needs->p, needs->fd[0], needs->fd[1]);
 		// if (-1 == dup2(cmds->output, 1))
 		// 	error_handler("dup2");
-		close(needs->outfile);
 		ft_execution((*cmds), needs);
 	}
-	close(0);
+	// close(0);
 
 }
 void cmds_executer(t_toexec *cmds, t_pipe *needs)
@@ -206,10 +201,11 @@ void cmds_executer(t_toexec *cmds, t_pipe *needs)
 	}
 	else
 	{
-		dprintf(2, "%d === 0;;;%d .   1;;;%d\n", needs->p, needs->fd[0], needs->fd[1]);
-		if (-1 == dup2(needs->fd[0], 0))
+		// dprintf(2, "%d === 0;;;%d .   1;;;%d\n", needs->p, needs->fd[0], needs->fd[1]);
+		if (-1 == dup2(needs->fd[0], STDIN_FILENO))
 			error_handler("dup2");
 		(close(needs->fd[0]), close(needs->fd[1]));
+		
 	}
 }
 
@@ -254,7 +250,7 @@ void executer(t_toexec *cmds)
 	while(needs.p >= 0)
 	{
 		waitpid(needs.pids[needs.p], NULL, 0);
-		dprintf(2, "{{{pids==%d}}}\n", needs.pids[needs.p]);
+		// dprintf(2, "{{{pids==%d}}}\n", needs.pids[needs.p]);
 		needs.p--;
 	}
 }
@@ -294,8 +290,6 @@ t_env	*envi = NULL;
 		i++;
 	}
 	
-
-
 	//_________________________________________________________________________________________________________________________________
 	char **arg = malloc(sizeof(char *) * 4);
 	arg[0] = ft_strdup("cat");
