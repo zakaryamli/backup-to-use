@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puchar.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyamli <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 17:54:41 by zyamli            #+#    #+#             */
-/*   Updated: 2023/11/26 17:57:23 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:18:29 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(int c, int *len)
+void	ft_putchar(int c, int *len, int fd)
 {
-	write(1, &c, 1);
+	write(fd, &c, 1);
 	(*len)++;
 }

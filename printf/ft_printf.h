@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:46:53 by zyamli            #+#    #+#             */
-/*   Updated: 2023/12/06 15:13:12 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:17:54 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-int		ft_printf(const char *str, ...);
-void	ft_putchar(int c, int *len);
-void	ft_puthex(unsigned int a, char c, int *len);
-void	ft_putnbr(int n, int *len);
-void	ft_putptr(void *i, int *len);
-int		ft_putstr(char *str, int *len);
-void	ft_putunsigned(unsigned int n, int *len);
+int		ft_printf(int fd, const char *str, ...);
+void	ft_putchar(int c, int *len, int fd);
+void	ft_puthex(unsigned int a, char c, int *len, int fd);
+void	ft_putnbr(int n, int *len, int fd);
+void	ft_putptr(void *i, int *len, int fd);
+int		ft_putstr(char *str, int *len, int fd);
+void	ft_putunsigned(unsigned int n, int *len, int fd);
 #endif

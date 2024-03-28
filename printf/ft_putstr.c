@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyamli <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 17:03:06 by zyamli            #+#    #+#             */
-/*   Updated: 2023/11/26 17:54:10 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/03/27 02:20:54 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str, int *len)
+int	ft_putstr(char *str, int *len, int fd)
 {
 	if (!str)
 		return (0);
 	while (*str)
 	{
-		write(1, str, 1);
+		write(fd, str, 1);
 		str++;
 		(*len)++;
 	}
