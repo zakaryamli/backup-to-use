@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:17:11 by moichou           #+#    #+#             */
-/*   Updated: 2024/04/07 23:21:50 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/04/18 14:18:42 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct t_pipe
 	t_env	*env_dup;
 	char	**env;
 	int		*pids;
+	int		step;
 	int		p;
 }	t_pipe;
 

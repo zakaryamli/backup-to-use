@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:17:00 by moichou           #+#    #+#             */
-/*   Updated: 2024/04/08 22:37:36 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/04/18 14:31:01 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int main(int ac, char **av, char **env)
 				test_lst(lst);
 
 				fill_envinlist(&lst, envl);
-				executer(lst, &needs);
+				// executer(lst, &needs);
 				envl = lst->env;
 	
 				// continue ;

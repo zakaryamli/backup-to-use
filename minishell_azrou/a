@@ -1,9 +1,11 @@
+1
+Makefile
 a
+ex.sh
 exec
 expanding
-ex.sh
+l
 list.todo
-Makefile
 minishell
 minishell.c
 minishell.dSYM

@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:04:57 by zyamli            #+#    #+#             */
-/*   Updated: 2024/04/14 19:44:57 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/04/18 14:28:57 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,6 +415,7 @@ void executer(t_toexec *cmds, t_pipe *needs)
 {
 	// t_pipe needs;
 	needs->p = 0;
+	needs->step = 0;
 	needs->env = env_tolist(&cmds->env);
 	// for(cmds->env; cmds->env != NULL; cmds->env = cmds->env->next)
 	// 	dprintf(2, "%s  == %s\n", cmds->env->name, cmds->env->var);
@@ -428,6 +429,7 @@ void executer(t_toexec *cmds, t_pipe *needs)
 			needs->pids = malloc(sizeof(int));
 			if(cmds->args)
 			{
+				needs->step = 1;
 				in_out_handler(cmds, needs);
 				if(check_builtin(cmds, needs))
 				{
@@ -447,13 +449,14 @@ void executer(t_toexec *cmds, t_pipe *needs)
 		}
 		else if(lst_size(cmds) > 1)
 		{
+			needs->step = 1;
 			first_cmd(&cmds, needs);
 			last_child(&cmds, needs);
 			// close(STDIN_FILENO);
 		}
-			(dup2(needs->save_fd_in, STDIN_FILENO) ,close(needs->save_fd_in));
-			(dup2(needs->save_fd_out, STDOUT_FILENO) ,close(needs->save_fd_out));
-
+		(dup2(needs->save_fd_in, STDIN_FILENO) ,close(needs->save_fd_in));
+		(dup2(needs->save_fd_out, STDOUT_FILENO) ,close(needs->save_fd_out));
+		print_open_file_descriptors();
 	// dprintf(2, "{{{%d p == %d}}}\n", getpid(), getppid());
 		// ff();
 
@@ -464,13 +467,17 @@ void executer(t_toexec *cmds, t_pipe *needs)
 			close(fds++);
 		}
 	needs->j = 0;
-	while(needs->j <= needs->p)
+	if(needs->step)
 	{
-		dprintf(2, "this the child %d\n", needs->pids[needs->j]);
-		waitpid(needs->pids[needs->j], needs->ex_stat, 0);
-		// dprintf(2, "{{{pids==%d}}}\n", needs.pids[needs.p]);
-		needs->j++;
+		while(needs->j <= needs->p)
+		{
+			dprintf(2, "this the child %d\n", needs->pids[needs->j]);
+			waitpid(needs->pids[needs->j], needs->ex_stat, 0);
+			// dprintf(2, "{{{pids==%d}}}\n", needs.pids[needs.p]);
+			needs->j++;
+		}
 	}
+	ff();
 
 }
 
