@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:00:50 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/25 21:14:49 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/05/26 20:11:55 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,31 @@ typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
-	long	philos_num;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	meals_limit;
-	long	action_start;
-	bool	action_end;
-	t_fork	*fork_arr;
-	t_philo	*philo;
+	long			philos_num;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			meals_limit;
+	long			action_start;
+	bool			action_end;
+	bool			start_threads;
+	pthread_mutex_t	table_lock;
+	pthread_mutex_t	write_lock;
+	t_fork			*fork_arr;
+	t_philo			*philo;
 }	t_table;
 
 struct s_philo
 {
-	int			count;
-	long		meals;
-	bool		full;
-	long		last_meal;
-	t_fork		*r_fork;
-	t_fork		*l_fork;
-	pthread_t	thred;
-	t_table		*table;
+	int				count;
+	long			meals;
+	bool			full;
+	long			last_meal;
+	t_fork			*r_fork;
+	t_fork			*l_fork;
+	pthread_t		thread;
+	t_table			*table;
+	pthread_mutex_t	philo_lock;
 };
 
 typedef enum s_flag
@@ -76,8 +80,17 @@ typedef enum s_flag
 	JOIN,
 	CREATE,
 	DETACH,
-	
 }	t_flag;
+
+typedef enum s_action
+{
+	PICK_R_FORK,
+	PICK_L_FORK,
+	EATING,
+	THINKING,
+	SLEEPING,
+	DIED,
+}	t_action;
 
 void print_error(char *err);
 int	ft_atoi(const char *str);
