@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:47:02 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/25 18:50:22 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:57:02 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,10 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (res * sign);
+}
+
+void	print_error(char *err)
+{
+	while(*err)
+		write(2, err++, 1);
 }
