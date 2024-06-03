@@ -1,0 +1,1 @@
+cc  main.c utils.c actions.c assing_handler.c dinner_time.c parsing.c posix_stuff.c time.c value_handler.c -o philo

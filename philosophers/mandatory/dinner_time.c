@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:36:32 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/28 14:22:36 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/03 16:58:09 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	freez_threads(t_philo *philo)
 	bool 	i;
 
 	i = false;
-	while(1)
-	{
-		ft_mutexes(&philo->table->table_lock, LOCK);
-		i = philo->table->all_in;
-		ft_mutexes(&philo->table->table_lock, UNLOCK);
+	// while(1)
+	// {
+	// 	ft_mutexes(&philo->table->table_lock, LOCK);
+	// 	i = philo->table->all_in;
+	// 	ft_mutexes(&philo->table->table_lock, UNLOCK);
 		
-		if (i == true)
-			break ;
-	}
+	// 	if (i == true)
+	// 		break ;
+	// }
 	if(philo->count % 2 != 0)
 		ft_usleep(philo->table->time_to_eat, philo->table);
 	
@@ -53,7 +53,6 @@ int	death(t_philo *philo)
 	long var;
 	ft_mutexes(&philo->philo_lock, LOCK);
 	var = get_time() - philo->table->action_start - philo->last_meal;
-	// printf("last meal :%ld    action start :%ld   var :%ld\n", philo->last_meal, philo->table->action_start, var);
 	ft_mutexes(&philo->philo_lock, UNLOCK);
 	if(var > philo->table->time_to_die)
 		return (1);
@@ -78,7 +77,8 @@ void check_death(t_table *table)
 				if(table->philo[i].full != true)
 					printf(RED"%zu\t%ld\tdied\n"RESET,table->philo->death ,table->philo->count);
 				ft_mutexes(&table->write_lock, UNLOCK);
-				
+				if(table->philos_num == 1)
+					ft_mutexes(&table->philo->r_fork->fork, UNLOCK);
 				return ;
 			}
 			i++;
@@ -93,17 +93,17 @@ void dinner_time(t_table *table)
 	i = 0;
 	if (table->meals_limit == 0)
 		return ;
-	else if (table->philos_num == 1)
-		;
+	// else if (table->philos_num == 1)
+	// 	;
 	else
 	{
 		table->all_in = false;
+		table->action_start = get_time();
 		while(i < table->philos_num)
 		{
 			thread_handler(&table->philo[i].thread, dinner_action, &table->philo[i], CREATE);
 			i++;
 		}
-		table->action_start = get_time();
 		ft_mutexes(&table->table_lock, LOCK);
 		table->all_in = true;
 		ft_mutexes(&table->table_lock, UNLOCK);

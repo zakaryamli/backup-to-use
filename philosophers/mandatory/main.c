@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 19:50:57 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/27 18:28:00 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:57:09 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ void philo_init(t_table *table)
 	table->action_end = false;
 	table->start_threads = false;
 	table->philo = malloc(sizeof(t_philo) * table->philos_num);
-	//protect malloc
+	if(!table->philo)
+		return (print_error("malloc erorr"));
 	ft_mutexes(&table->table_lock, INIT);
 	ft_mutexes(&table->write_lock, INIT);
 	table->fork_arr = malloc(sizeof(t_fork) * table->philos_num);
-	//protect malloc
+	if(!table->fork_arr)
+		return (print_error("malloc erorr"));
 	i = 0;
 	while(i < table->philos_num)
 	{

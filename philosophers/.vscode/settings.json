@@ -1,6 +1,10 @@
 {
 	"files.associations": {
 		"chrono": "c",
-		"unordered_map": "c"
+		"unordered_map": "c",
+		"philo_bonus.h": "c",
+		"limits.h": "c",
+		"stdlib.h": "c",
+		"__locale": "c"
 	}
 }
