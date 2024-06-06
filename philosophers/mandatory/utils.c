@@ -6,11 +6,29 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:47:02 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/27 17:57:02 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:26:21 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	freez_threads(t_philo *philo)
+{
+	bool 	i;
+
+	i = false;
+	while(1)
+	{
+		ft_mutexes(&philo->table->table_lock, LOCK);
+		i = philo->table->all_in;
+		ft_mutexes(&philo->table->table_lock, UNLOCK);
+		if (i == true)
+			break ;
+	}
+	if(philo->count % 2 != 0)
+		ft_usleep(philo->table->time_to_eat, philo->table);
+	
+}
 
 static int	ft_handler(const char *str, int sign)
 {

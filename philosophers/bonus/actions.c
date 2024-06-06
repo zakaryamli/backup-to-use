@@ -6,16 +6,14 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:38:43 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/02 18:14:10 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:16:32 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
 void	write_action(t_action key, t_philo *philo)
-{
-	// if (philo->full)
-	// 	return ;	
+{	
 	sem_wait(philo->table->write_lock);
 	if (key == PICK_L_FORK || (key == PICK_R_FORK))
 	{
@@ -54,7 +52,7 @@ void eating(t_philo *philo)
 	philo->last_meal = get_time() - philo->table->action_start;
 	write_action(EATING, philo);
 	philo->meals++;
-	ft_usleep(philo->table->time_to_eat, philo->table);
+	ft_usleep(philo->table->time_to_eat);
 	sem_post(philo->table->fork_lock);
 	sem_post(philo->table->fork_lock);
 }

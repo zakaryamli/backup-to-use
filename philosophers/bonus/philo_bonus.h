@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:00:50 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/02 17:03:49 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:21:02 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,7 @@ void fork_handler(t_philo *philo, t_table *table, int pos);
 int	parsing(t_table *table, char **av);
 void	print_error(char *err);
 size_t	get_time(void);
-void ft_usleep(int miliseconds, t_table *table);
+void ft_usleep(int miliseconds);
+void kill_all(t_table *table);
+void *check_full(void *data);
 #endif

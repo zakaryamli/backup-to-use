@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:00:50 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/27 18:01:56 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:26:37 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,5 @@ int	parsing(t_table *table, char **av);
 void	print_error(char *err);
 size_t	get_time(void);
 void ft_usleep(int miliseconds, t_table *table);
+void	freez_threads(t_philo *philo);
 #endif

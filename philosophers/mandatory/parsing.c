@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:18 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/01 14:28:54 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:28:35 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,6 @@ int	parsing(t_table *table, char **av)
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
-	// if (table->time_to_die < 60
-	// 	|| table->time_to_eat < 60
-	// 	|| table->time_to_sleep < 60)
-	// 	{
-	// 		print_error(RED"Timestamps less than 60ms"RESET);
-	// 		return (1);
-	// 	}
 	if (av[5])
 		table->meals_limit = ft_atoi(av[5]);
 	else

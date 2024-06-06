@@ -6,11 +6,38 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:47:02 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/01 15:36:13 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:20:10 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+void kill_all(t_table *table)
+{
+	int i;
+
+	i = 0;
+	while(i < table->philos_num)
+	{
+		kill(table->pid[i], SIGKILL);
+		i++;
+	}
+}
+
+void *check_full(void *data)
+{
+	t_table *table;
+	int i;
+	table = (t_table *)data;
+	i = 0;
+	while(i < table->philos_num)
+	{
+		sem_wait(table->full);
+		i++;
+	}
+	sem_post(table->end_simu);
+	return(NULL);
+}
 
 static int	ft_handler(const char *str, int sign)
 {

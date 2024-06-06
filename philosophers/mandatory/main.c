@@ -6,16 +6,36 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 19:50:57 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/31 15:57:09 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:28:22 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void philo_stuff(t_table *table)
+{
+	int		i;
+	t_philo	*philo;
+
+	i = 0;
+	while (i < table->philos_num)
+	{
+		philo = table->philo + i;
+		philo->count = i + 1;
+		philo->full = false;
+		philo->meals = 0;
+		philo->last_meal = 0;
+		ft_mutexes(&philo->philo_lock, INIT);
+		fork_handler(philo, table, i);
+		philo->table = table;
+		i++;
+	}
+}
+
 void philo_init(t_table *table)
 {
-	int i;
-	t_philo *philo;
+	int		i;
+
 	table->action_end = false;
 	table->start_threads = false;
 	table->philo = malloc(sizeof(t_philo) * table->philos_num);
@@ -33,19 +53,7 @@ void philo_init(t_table *table)
 		table->fork_arr[i].frk_cnt = i;
 		i++;
 	}
-	// norm from here
-	i = 0;
-	while (i < table->philos_num)
-	{
-		philo = table->philo + i;
-		philo->count = i + 1;
-		philo->full = false;
-		philo->meals = 0;
-		ft_mutexes(&philo->philo_lock, INIT);
-		fork_handler(philo, table, i);
-		philo->table = table;
-		i++;
-	}
+	philo_stuff(table);
 }
 int	main (int ac, char **av)
 {

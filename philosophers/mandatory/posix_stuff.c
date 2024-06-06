@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:46:25 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/27 21:21:20 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:47:54 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void thread_handler(pthread_t *thread, void *(*func)(void *), void *data, t_flag
 
 	if (key == CREATE)
 		status = pthread_create(thread, NULL, func, data);
-	else if (key == JOIN)
+	if (key == JOIN)
 		status = pthread_join(*thread, NULL);
-	else if (key == DETACH)
+	if (key == DETACH)
 		status = pthread_detach(*thread);
 	thread_mutex_error(status, key);
 }

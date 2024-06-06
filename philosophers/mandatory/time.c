@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:35 by zyamli            #+#    #+#             */
-/*   Updated: 2024/05/28 13:30:06 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:48:28 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void ft_usleep(int miliseconds, t_table *table)
 	size_t	start;
 
 	start = get_time();
-	while(get_time() - start < miliseconds && !action_done(table))
+	while(get_time() - start < (size_t)miliseconds && !action_done(table))
 		usleep(1);
 }
