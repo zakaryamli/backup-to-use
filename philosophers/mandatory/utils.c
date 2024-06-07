@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:47:02 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/06 16:26:21 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:44:34 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	freez_threads(t_philo *philo)
 {
-	bool 	i;
+	bool	i;
 
 	i = false;
-	while(1)
+	while (1)
 	{
 		ft_mutexes(&philo->table->table_lock, LOCK);
 		i = philo->table->all_in;
@@ -25,9 +25,8 @@ void	freez_threads(t_philo *philo)
 		if (i == true)
 			break ;
 	}
-	if(philo->count % 2 != 0)
+	if (philo->count % 2 != 0)
 		ft_usleep(philo->table->time_to_eat, philo->table);
-	
 }
 
 static int	ft_handler(const char *str, int sign)
@@ -40,7 +39,7 @@ static int	ft_handler(const char *str, int sign)
 	handler = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		tmp = handler * 10 + (str[i] - 48); 
+		tmp = handler * 10 + (str[i] - 48);
 		if (tmp < handler && sign == 1)
 			return (-1);
 		if (tmp < handler && sign == -1)
@@ -82,6 +81,6 @@ int	ft_atoi(const char *str)
 
 void	print_error(char *err)
 {
-	while(*err)
+	while (*err)
 		write(2, err++, 1);
 }

@@ -6,13 +6,13 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:46:25 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/06 14:47:54 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:43:29 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void thread_mutex_error(int status, t_flag key)
+static void	thread_mutex_error(int status, t_flag key)
 {
 	if (status != 0)
 	{
@@ -33,10 +33,10 @@ static void thread_mutex_error(int status, t_flag key)
 	}
 }
 
-void thread_handler(pthread_t *thread, void *(*func)(void *), void *data, t_flag key)
+void	thread_handler(pthread_t *thread, void *(*func)(void *),
+	void *data, t_flag key)
 {
 	int	status;
-
 
 	if (key == CREATE)
 		status = pthread_create(thread, NULL, func, data);
@@ -47,9 +47,10 @@ void thread_handler(pthread_t *thread, void *(*func)(void *), void *data, t_flag
 	thread_mutex_error(status, key);
 }
 
-void ft_mutexes(pthread_mutex_t *mutex, t_flag key)
+void	ft_mutexes(pthread_mutex_t *mutex, t_flag key)
 {
-	int status;
+	int	status;
+
 	if (key == LOCK)
 		status = pthread_mutex_lock(mutex);
 	else if (key == UNLOCK)

@@ -6,13 +6,13 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:53:57 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/03 16:49:10 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:38:25 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void fork_handler(t_philo *philo, t_table *table, int pos)
+void	fork_handler(t_philo *philo, t_table *table, int pos)
 {
 	philo->r_fork = table->fork_arr + pos;
 	if (pos == table->philos_num - 1)

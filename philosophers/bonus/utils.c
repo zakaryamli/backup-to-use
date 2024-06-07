@@ -6,37 +6,38 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:47:02 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/06 16:20:10 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:54:09 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void kill_all(t_table *table)
+void	kill_all(t_table *table)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < table->philos_num)
+	while (i < table->philos_num)
 	{
 		kill(table->pid[i], SIGKILL);
 		i++;
 	}
 }
 
-void *check_full(void *data)
+void	*check_full(void *data)
 {
-	t_table *table;
-	int i;
+	t_table	*table;
+	int		i;
+
 	table = (t_table *)data;
 	i = 0;
-	while(i < table->philos_num)
+	while (i < table->philos_num)
 	{
 		sem_wait(table->full);
 		i++;
 	}
 	sem_post(table->end_simu);
-	return(NULL);
+	return (NULL);
 }
 
 static int	ft_handler(const char *str, int sign)
@@ -49,7 +50,7 @@ static int	ft_handler(const char *str, int sign)
 	handler = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		tmp = handler * 10 + (str[i] - 48); 
+		tmp = handler * 10 + (str[i] - 48);
 		if (tmp < handler && sign == 1)
 			return (-1);
 		if (tmp < handler && sign == -1)
@@ -91,6 +92,6 @@ int	ft_atoi(const char *str)
 
 void	print_error(char *err)
 {
-	while(*err)
+	while (*err)
 		write(2, err++, 1);
 }

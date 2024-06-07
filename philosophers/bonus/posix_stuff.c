@@ -6,13 +6,13 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:46:25 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/06 16:17:14 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:53:10 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-static void thread_sem_error(int status, t_flag key)
+static void	thread_sem_error(int status, t_flag key)
 {
 	if (status != 0)
 	{
@@ -35,7 +35,8 @@ static void thread_sem_error(int status, t_flag key)
 	}
 }
 
-void thread_handler(pthread_t *thread, void *(*func)(void *), void *data, t_flag key)
+void	thread_handler(pthread_t *thread, void *(*func)(void *),
+	void *data, t_flag key)
 {
 	int	status;
 

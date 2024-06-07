@@ -6,13 +6,13 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 19:50:57 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/06 16:28:22 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:41:27 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void philo_stuff(t_table *table)
+void	philo_stuff(t_table *table)
 {
 	int		i;
 	t_philo	*philo;
@@ -32,22 +32,22 @@ void philo_stuff(t_table *table)
 	}
 }
 
-void philo_init(t_table *table)
+void	philo_init(t_table *table)
 {
 	int		i;
 
 	table->action_end = false;
 	table->start_threads = false;
 	table->philo = malloc(sizeof(t_philo) * table->philos_num);
-	if(!table->philo)
+	if (!table->philo)
 		return (print_error("malloc erorr"));
 	ft_mutexes(&table->table_lock, INIT);
 	ft_mutexes(&table->write_lock, INIT);
 	table->fork_arr = malloc(sizeof(t_fork) * table->philos_num);
-	if(!table->fork_arr)
+	if (!table->fork_arr)
 		return (print_error("malloc erorr"));
 	i = 0;
-	while(i < table->philos_num)
+	while (i < table->philos_num)
 	{
 		ft_mutexes(&table->fork_arr[i].fork, INIT);
 		table->fork_arr[i].frk_cnt = i;
@@ -55,9 +55,11 @@ void philo_init(t_table *table)
 	}
 	philo_stuff(table);
 }
-int	main (int ac, char **av)
+
+int	main(int ac, char **av)
 {
 	t_table	table;
+
 	if (ac == 5 || ac == 6)
 	{
 		if (parsing(&table, av))

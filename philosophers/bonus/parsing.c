@@ -6,7 +6,7 @@
 /*   By: zyamli <zakariayamli00@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:55:18 by zyamli            #+#    #+#             */
-/*   Updated: 2024/06/06 16:16:49 by zyamli           ###   ########.fr       */
+/*   Updated: 2024/06/06 16:51:46 by zyamli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ static int	check_ifvalid(char **arg)
 	}
 	return (0);
 }
+
 int	parsing(t_table *table, char **av)
 {
-	if(check_ifvalid(&av[1]))
+	if (check_ifvalid(&av[1]))
 		return (1);
 	table->philos_num = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
